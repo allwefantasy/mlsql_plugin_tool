@@ -21,17 +21,18 @@ except IOError:
 VERSION = __version__
 
 setup(
-    name='mlsql-plugin',
+    name='mlsql_plugin_tool',
     version=VERSION,
     description='Tool to build MLSQL Plugin',
     long_description="Tool to build MLSQL Plugin from https://github.com/allwefantasy/mlsql-plugins",
     author='WilliamZhu',
     author_email='allwefantasy@gmail.com',
-    url='https://github.com/allwefantasy/sfcli',
+    url='https://github.com/allwefantasy/mlsql-plugin-tool',
     packages=['tech',
               'tech.mlsql',
               'tech.mlsql.plugin',
               'tech.mlsql.plugin.tool',
+              'tech.mlsql.plugin.tool.commands'
               ],
     include_package_data=True,
     license='http://www.apache.org/licenses/LICENSE-2.0',
@@ -40,7 +41,7 @@ setup(
     ],
     entry_points='''
         [console_scripts]
-        sfcli=tech.mlsql.plugin.tool.Plugin:main
+        mlsql_plugin_tool=tech.mlsql.plugin.tool.Plugin:main
     ''',
     setup_requires=['pypandoc'],
     classifiers=[
