@@ -3,6 +3,7 @@ import sys
 import click
 
 from tech.mlsql.plugin.tool.commands.builder import PluginBuilder
+from tech.mlsql.plugin.tool.commands.compile_process import Spark311, Spark243
 
 
 def eprint(*args, **kwargs):
@@ -29,6 +30,20 @@ def cli():
 def build(mvn: str, module_name: str):
     builder = PluginBuilder(mvn, module_name)
     builder.build()
+
+
+@cli.command()
+def spark311():
+    builder = Spark311()
+    builder.pom_convert()
+    builder.source_convert()
+
+
+@cli.command()
+def spark243():
+    builder = Spark243()
+    builder.pom_convert()
+    builder.source_convert()
 
 
 def main():

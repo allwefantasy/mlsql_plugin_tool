@@ -37,7 +37,8 @@ setup(
     include_package_data=True,
     license='http://www.apache.org/licenses/LICENSE-2.0',
     install_requires=[
-        'click>=6.7'
+        'click>=6.7',
+        'jinja2>=3.0.0'
     ],
     entry_points='''
         [console_scripts]
