@@ -2,8 +2,9 @@ import os
 import pathlib
 import shutil
 
-from tech.mlsql.plugin.tool.Plugin import spark311
-from tech.mlsql.plugin.tool.commands.compile_process import Spark311, BaseSpark
+import jinja2
+
+from tech.mlsql.plugin.tool.commands.compile_process import Spark311, Spark243
 from tech.mlsql.plugin.tool.shellutils import run_cmd
 
 
@@ -18,11 +19,25 @@ class PluginBuilder(object):
         # spark311 / spark243
         self.spark = spark
 
+    def plugin_desc_convert(self, current_path: str):
+        env = jinja2.Environment(loader=jinja2.FileSystemLoader(os.path.join(current_path, '.repo')))
+        template_name = "plugin.template.desc"
+        template = env.get_template(template_name)
+        plugin_desc = template.render(spark_binary_version=self.spark_binary_version,
+                                      spark_version=self.spark_version,
+                                      scala_version=self.scala_version,
+                                      scala_binary_version=self.scala_binary_version
+                                      )
+        with open("plugin.desc", "w") as f:
+            f.writelines(plugin_desc)
+
     def convert(self):
         for root, dirs, files in os.walk(os.getcwd()):
             self._convert(root)
             for module in dirs:
-                self._convert(os.path.join(root, module))
+                module_path = os.path.join(root, module)
+                self._convert(module_path)
+                self.plugin_desc_convert(module_path)
 
     def _convert(self, current_path: str):
         if not os.path.exists(os.path.join(current_path, ".repo")):
@@ -30,7 +45,7 @@ class PluginBuilder(object):
         if self.spark == "spark311":
             builder = Spark311()
         elif self.spark == "spark243":
-            builder = Spark311()
+            builder = Spark243()
         else:
             raise Exception(f"spark {self.spark} is not support ")
         builder.pom_convert()
