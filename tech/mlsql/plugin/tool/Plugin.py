@@ -24,11 +24,16 @@ def cli():
     help="mvn command")
 @click.option(
     "--module_name",
-    required=False,
+    required=True,
     type=str,
     help="module name")
-def build(mvn: str, module_name: str):
-    builder = PluginBuilder(mvn, module_name)
+@click.option(
+    "--spark",
+    required=False,
+    type=str,
+    help="spark version")
+def build(mvn: str, module_name: str, spark: str):
+    builder = PluginBuilder(mvn, module_name, spark)
     builder.build()
 
 
