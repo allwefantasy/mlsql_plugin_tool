@@ -7,8 +7,10 @@ import shutil
 
 class BaseSpark(object):
     def pom_convert(self):
-        env = jinja2.Environment(loader=jinja2.FileSystemLoader(os.path.join(self.current_path, '.repo')))
         template_name = "pom.template.xml"
+        repo_path = os.path.join(self.current_path, '.repo')
+        env = jinja2.Environment(loader=jinja2.FileSystemLoader(repo_path))
+        print(f"load {template_name}: {os.path.join(repo_path, template_name)}")
         template = env.get_template(template_name)
         pom_xml = template.render(spark_binary_version=self.spark_binary_version,
                                   spark_version=self.spark_version,
@@ -16,12 +18,14 @@ class BaseSpark(object):
                                   scala_binary_version=self.scala_binary_version,
                                   arrow_version=self.arrow_version
                                   )
-        with open("pom.xml", "w") as f:
+        target_pom_path = os.path.join(self.current_path, "pom.xml")
+        print(f"save pom.xml: {target_pom_path}")
+        with open(target_pom_path, "w") as f:
             f.writelines(pom_xml)
 
     def source_convert(self):
-        parent_path = os.path.join(os.getcwd(), ".repo", self.name, "source")
-        target_path = os.path.join(os.getcwd(), "src", "main", "java")
+        parent_path = os.path.join(self.current_path, ".repo", self.name, "source")
+        target_path = os.path.join(self.current_path, "src", "main", "java")
         files = glob.glob(os.path.join(parent_path, "**", "*.scala"), recursive=True)
         for file in files:
             print(f"copy {file} to {file.replace(parent_path, target_path)}")
