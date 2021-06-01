@@ -10,6 +10,7 @@ tech/mlsql/__init__.py
 tech/mlsql/plugin/__init__.py
 tech/mlsql/plugin/tool/Plugin.py
 tech/mlsql/plugin/tool/__init__.py
+tech/mlsql/plugin/tool/http_manager.py
 tech/mlsql/plugin/tool/shellutils.py
 tech/mlsql/plugin/tool/commands/__init__.py
 tech/mlsql/plugin/tool/commands/builder.py

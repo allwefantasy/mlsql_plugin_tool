@@ -4,6 +4,7 @@ import click
 
 from tech.mlsql.plugin.tool.commands.builder import PluginBuilder
 from tech.mlsql.plugin.tool.commands.compile_process import Spark311, Spark243
+from tech.mlsql.plugin.tool.http_manager import HttpManager
 
 
 def eprint(*args, **kwargs):
@@ -49,6 +50,38 @@ def spark243():
     builder = Spark243()
     builder.pom_convert()
     builder.source_convert()
+
+
+@cli.command()
+@click.option(
+    "--jar_path",
+    required=False,
+    type=str,
+    help="")
+@click.option(
+    "--module_name",
+    required=False,
+    type=str,
+    help="")
+@click.option(
+    "--user",
+    required=True,
+    type=str,
+    help="")
+@click.option(
+    "--password",
+    required=True,
+    type=str,
+    help="")
+def upload(jar_path, module_name, user, password):
+    with open("./{}/desc.plugin".format(module_name), "r") as f:
+        kvs = [line.strip().split("=", 1) for line in f.readlines() if "=" in line]
+        config = dict([(kv[0], kv[1]) for kv in kvs])
+    print(config)
+    HttpManager.upload_plugin(store_path="http://store.mlsql.tech/run", file_path=jar_path,
+                              data={"userName": user, "password": password,
+                                    "pluginType": "MLSQL_PLUGIN",
+                                    "pluginName": config["moduleName"], **config})
 
 
 def main():
