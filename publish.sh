@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 project=mlsql_plugin_tool
-version=0.1.3
+version=0.1.4
 
 quoteVersion=$(cat version.py|grep "__version__" |awk -F'=' '{print $2}'| xargs )
 
@@ -20,4 +20,4 @@ pip install ${project}-${version}-py3-none-any.whl
 cd -
 
 echo "upload"
-twine upload dist/*
+# twine upload dist/*
