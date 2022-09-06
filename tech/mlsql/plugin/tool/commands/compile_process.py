@@ -16,7 +16,8 @@ class BaseSpark(object):
                                   spark_version=self.spark_version,
                                   scala_version=self.scala_version,
                                   scala_binary_version=self.scala_binary_version,
-                                  arrow_version=self.arrow_version
+                                  arrow_version=self.arrow_version,
+                                  jackson_version=self.jackson_version
                                   )
         target_pom_path = os.path.join(self.current_path, "pom.xml")
         print(f"save pom.xml: {target_pom_path}")
@@ -39,6 +40,7 @@ class Spark311(BaseSpark):
         self.scala_version = "2.12.10"
         self.scala_binary_version = "2.12"
         self.arrow_version = "2.0.0"
+        self.jackson_version = "2.10.0"
         self.name = "311"
         self.current_path = current_path
 
@@ -50,6 +52,7 @@ class Spark243(BaseSpark):
         self.scala_version = "2.11.12"
         self.scala_binary_version = "2.11"
         self.arrow_version = "0.10.0"
+        self.jackson_version = "2.6.7.1"
         self.name = "243"
         self.current_path = current_path
 

@@ -20,4 +20,4 @@ pip install ${project}-${version}-py3-none-any.whl
 cd -
 
 echo "upload"
-# twine upload dist/*
+#twine upload dist/*

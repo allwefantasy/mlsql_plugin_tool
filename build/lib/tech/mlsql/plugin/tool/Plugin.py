@@ -39,6 +39,18 @@ def build(mvn: str, module_name: str, spark: str):
 
 
 @cli.command()
+def scala211():
+    builder = Spark243()
+    builder.pom_convert()
+
+
+@cli.command()
+def scala212():
+    builder = Spark311()
+    builder.pom_convert()
+
+
+@cli.command()
 def spark311():
     builder = Spark311()
     builder.pom_convert()
