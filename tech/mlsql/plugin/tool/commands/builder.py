@@ -4,7 +4,7 @@ import shutil
 
 import jinja2
 
-from tech.mlsql.plugin.tool.commands.compile_process import Spark311, Spark243
+from tech.mlsql.plugin.tool.commands.compile_process import Spark311, Spark243, Spark330
 from tech.mlsql.plugin.tool.shellutils import run_cmd
 
 
@@ -25,6 +25,8 @@ class PluginBuilder(object):
             builder = Spark311(self.current_path)
         elif self.spark == "spark243":
             builder = Spark243(self.current_path)
+        elif self.spark == "spark330":
+            builder = Spark330(self.current_path)
         else:
             raise Exception(f"spark {self.spark} is not support ")
         return builder
@@ -68,6 +70,8 @@ class PluginBuilder(object):
             builder = Spark311(current_path)
         elif self.spark == "spark243":
             builder = Spark243(current_path)
+        elif self.spark == "spark330":
+            builder = Spark330(current_path)
         else:
             raise Exception(f"spark {self.spark} is not support ")
         builder.pom_convert()
