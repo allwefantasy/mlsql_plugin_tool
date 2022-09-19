@@ -33,6 +33,18 @@ class BaseSpark(object):
             shutil.copyfile(file, file.replace(parent_path, target_path))
 
 
+class Spark330(BaseSpark):
+    def __init__(self, current_path=os.getcwd()):
+        self.spark_binary_version = "3.3"
+        self.spark_version = "3.3.0"
+        self.scala_version = "2.12.15"
+        self.scala_binary_version = "2.12"
+        self.arrow_version = "7.0.0"
+        self.jackson_version = "2.13.3"
+        self.name = "330"
+        self.current_path = current_path
+
+
 class Spark311(BaseSpark):
     def __init__(self, current_path=os.getcwd()):
         self.spark_binary_version = "3.0"

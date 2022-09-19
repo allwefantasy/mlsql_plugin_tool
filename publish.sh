@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 project=mlsql_plugin_tool
-version=0.1.4
+version=0.1.5
 
 quoteVersion=$(cat version.py|grep "__version__" |awk -F'=' '{print $2}'| xargs )
 

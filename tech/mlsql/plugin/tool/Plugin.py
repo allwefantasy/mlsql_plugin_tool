@@ -3,7 +3,7 @@ import sys
 import click
 
 from tech.mlsql.plugin.tool.commands.builder import PluginBuilder
-from tech.mlsql.plugin.tool.commands.compile_process import Spark311, Spark243
+from tech.mlsql.plugin.tool.commands.compile_process import Spark311, Spark243, Spark330
 from tech.mlsql.plugin.tool.http_manager import HttpManager
 
 
@@ -56,6 +56,11 @@ def spark311():
     builder.pom_convert()
     builder.source_convert()
 
+@cli.command()
+def spark330():
+    builder = Spark330()
+    builder.pom_convert()
+    builder.source_convert()
 
 @cli.command()
 def spark243():
