@@ -71,7 +71,7 @@ class PluginBuilder(object):
         elif self.spark == "spark243":
             builder = Spark243(current_path)
         elif self.spark == "spark330":
-            builder = Spark330(self.current_path)
+            builder = Spark330(current_path)
         else:
             raise Exception(f"spark {self.spark} is not support ")
         builder.pom_convert()
